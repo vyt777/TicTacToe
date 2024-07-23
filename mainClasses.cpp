@@ -80,15 +80,23 @@ void TicTacToe::game(){
     while(turns_left){
         add_move(user1);
         result = game_finished();
-        if(result){
+        if(result == user_x){
             cout<<"Player "<<user1.name<<" won!\n";
             return;
         }
+        else if(result == user_o) {
+            cerr<<"Error: Player 2 cannot win right after Player 1's turn. Something is wrong.\n";
+            exit(EXIT_FAILURE);
+        }
         add_move(user2);
         result = game_finished();
-        if(result){
+        if(result == user_o){
             cout<<"Player "<<user2.name<<" won!\n";
             return;
+        }
+        else if(result == user_x) {
+            cerr<<"Error: Player 1 cannot win right after Player 2's turn. Something is wrong.\n";
+            exit(EXIT_FAILURE);
         }
         turns_left--;
     }
